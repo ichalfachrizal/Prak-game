@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class hog : MonoBehaviour {
 	public AudioClip jump;
 	public AudioClip leftright;
+	public Text score;
 	// Use this for initialization
 	void Start () {
 	
@@ -31,10 +32,14 @@ public class hog : MonoBehaviour {
 		}
 	}
 
+
 	void OnCollisionEnter(Collision other){
-		//Debug.Log('tersentuh')
-	if (other.gameObject.tag=="point")
-			other.gameObject.audio.Play();
+		if (other.gameObject.tag == "point") {
+		other.gameObject.audio.Play ();
+			int point = int.Parse (score.text) + 10;
+			score.text = point.ToString ();
+			Destroy (other.gameObject);	
+				}
 	}
 		
 
@@ -43,4 +48,10 @@ public class hog : MonoBehaviour {
 			if (other.gameObject.tag=="point")
 				other.gameObject.audio.Play();
 	}
+
+	//void OnCollisionEnter(Collision other){
+		//if(other.gameObject.tag == "boxpoint"){
+		
+	//}
+	//}
 }
